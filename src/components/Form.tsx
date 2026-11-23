@@ -1,13 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "@tanstack/react-router";
 import { CheckIcon } from "components/Icons";
+import { PageLink } from "components/page-link";
 import { ReactNode, useEffect } from "react";
 import { Resolver, useForm, useWatch } from "react-hook-form";
 import { FormValueTypes } from "types/form";
 import * as yup from "yup";
-
-const fieldControl =
-  "block w-full border-2 border-ink bg-paper px-3 py-2 text-ink placeholder:text-ink/60 aria-invalid:border-tomato aria-invalid:shadow-hard-tomato";
 
 interface FieldProps {
   id: keyof FormValueTypes;
@@ -21,14 +18,14 @@ const Field = ({ id, label, required, invalid, children }: FieldProps) => (
   <div>
     <label
       htmlFor={id}
-      className="mb-2 flex items-center gap-2 font-masthead text-sm uppercase"
+      className="label mb-2 flex items-center gap-2"
     >
       {label}
       {required && <span aria-hidden="true">*</span>}
       {invalid && (
         <span
           aria-hidden="true"
-          className="grid size-5 place-items-center rounded-full bg-tomato text-sm font-bold text-paper"
+          className="grid size-5 place-items-center rounded-disc bg-fluoro-pink text-ink"
         >
           !
         </span>
@@ -121,7 +118,7 @@ export const Form = (props: FormProps) => {
         <input
           id="name"
           type="text"
-          className={fieldControl}
+          className="field"
           placeholder="John Doe"
           aria-invalid={!!errors.name}
           {...register("name")}
@@ -132,7 +129,7 @@ export const Form = (props: FormProps) => {
         <input
           id="phone"
           type="tel"
-          className={fieldControl}
+          className="field"
           placeholder="+353 86 123 4567"
           aria-invalid={!!errors.phone}
           {...register("phone")}
@@ -143,7 +140,7 @@ export const Form = (props: FormProps) => {
         <input
           id="email"
           type="email"
-          className={fieldControl}
+          className="field"
           placeholder="you@company.com"
           aria-invalid={!!errors.email}
           {...register("email")}
@@ -153,7 +150,7 @@ export const Form = (props: FormProps) => {
       <Field id="message" label="Message" required invalid={!!errors.message}>
         <textarea
           id="message"
-          className={fieldControl}
+          className="field"
           rows={3}
           placeholder="Please enter your message"
           aria-invalid={!!errors.message}
@@ -164,7 +161,7 @@ export const Form = (props: FormProps) => {
       <div>
         <label
           htmlFor="check"
-          className="flex min-h-11 items-center gap-3"
+          className="flex min-h-12 items-center gap-4"
         >
           <input
             id="check"
@@ -174,7 +171,9 @@ export const Form = (props: FormProps) => {
           />
           <span>
             I have read and agree to the{" "}
-            <Link to="/terms-and-conditions">Terms and Conditions</Link>{" "}
+            <PageLink to="/terms-and-conditions" className="min-h-0 px-2">
+              Terms
+            </PageLink>{" "}
             <span aria-hidden="true">*</span>
           </span>
         </label>
@@ -183,9 +182,7 @@ export const Form = (props: FormProps) => {
 
       <div>
         <button
-          className={`press-button disabled:pointer-events-none disabled:opacity-60 ${
-            isSubmitted ? "bg-ink text-paper" : ""
-          }`}
+          className={`button ${isSubmitted ? "bg-ink text-paper" : ""}`}
           type="submit"
           disabled={!isValid || isSubmitted}
         >

@@ -57,25 +57,19 @@ function ContactRoute() {
   };
 
   return (
-    <main className="mx-auto grid w-full max-w-sheet gap-8 px-gutter py-8 lg:grid-cols-12">
+    <main className="sheet grid gap-8 py-8 lg:grid-cols-12">
       <div className="lg:col-span-5">
-        <h1 className="headline misregister ink-bubblegum mb-6 text-royal">
-          Contact Us
-        </h1>
+        <h1>Contact us</h1>
         <p className="max-w-prose text-xl italic">
           Got a question? Want a quote? Got some feedback? Don&apos;t hesitate
           to get in contact and we will be happy to help.
         </p>
-        <div aria-hidden="true" className="relative mt-8 hidden h-48 lg:block">
-          <div className="rough-edges absolute top-0 left-0 size-40 rounded-full bg-tangerine" />
-          <div className="motif-lines rough-edges ink-overlap absolute top-8 left-20 h-40 w-32 text-royal" />
-        </div>
       </div>
 
-      <div className="ink-noise relative border-2 border-dashed border-ink bg-aqua p-6 sm:p-8 lg:col-span-7">
+      <div className="relative border-4 border-dashed border-ink bg-lemon-yellow p-8 lg:col-span-7">
         <span
           aria-hidden="true"
-          className="absolute -top-4 left-6 bg-paper px-2 text-2xl leading-none"
+          className="absolute -top-4 left-8 bg-paper px-2 text-2xl leading-none"
         >
           ✂
         </span>

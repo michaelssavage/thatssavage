@@ -1,0 +1,55 @@
+:root {
+  --paper: #f6f2ea;
+  --ink: #141210;
+  --ink-muted: #5a544c;
+  --lemon-yellow: #fff200;
+  --fluoro-pink: #ff48b0;
+  --cobalt: #2340c9;
+  --lime-green: #44d62c;
+  --blush: #f2cdcf;
+
+  --font-chango: "Chango", "Arial Black", sans-serif;
+  --font-oswald: "Oswald", "Arial Narrow", sans-serif;
+  --font-newsreader: "Newsreader", Georgia, serif;
+
+  --shadow-hard: 4px 4px 0 var(--ink);
+  --shadow-hard-pressed: 2px 2px 0 var(--ink);
+  --misprint: 5px 5px 0 var(--fluoro-pink);
+  --misprint-double: 8px 5px 0 var(--fluoro-pink), -6px -4px 0 var(--cobalt);
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-4: 32px;
+  --space-8: 64px;
+
+  --border-hairline: 1px solid var(--ink);
+  --border-frame: 3px solid var(--ink);
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-lemon-yellow: var(--lemon-yellow);
+  --color-fluoro-pink: var(--fluoro-pink);
+  --color-cobalt: var(--cobalt);
+  --color-lime-green: var(--lime-green);
+  --color-blush: var(--blush);
+
+  --font-chango: var(--font-chango);
+  --font-oswald: var(--font-oswald);
+  --font-newsreader: var(--font-newsreader);
+  --default-font-family: var(--font-newsreader);
+
+  --radius-*: initial;
+  --radius-disc: 999px;
+  --shadow-*: initial;
+  --text-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --blur-*: initial;
+
+  --breakpoint-xs: 30rem;
+  --container-sheet: 1360px;
+  --spacing-gutter: var(--space-2);
+}

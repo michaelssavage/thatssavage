@@ -4,253 +4,278 @@ import clonmany from "assets/customers/clonmany.jpg";
 import country from "assets/customers/country-fit.jpg";
 import disney from "assets/customers/disney.jpg";
 import keren from "assets/customers/keren-hen.jpg";
+import eireStamp from "assets/eire-stamp.png";
+import tapeOne from "assets/tape/tape-1.png";
+import tapeTwo from "assets/tape/tape-2.png";
+import { Figure } from "components/figure";
+import { PageLink } from "components/page-link";
 import { cards } from "content/card-array";
 
 const customers = [
-  { img: bride, label: "Bride in white on steps" },
-  { img: country, label: "Country fit dancers" },
-  { img: disney, label: "Hen do with disney character" },
-  { img: clonmany, label: "Clonmany green and red tops" },
-  { img: keren, label: "Hen tops with cocktail glasses" },
+  {
+    img: bride,
+    alt: "Bride in white on steps",
+    caption: "The bride and her tribe",
+  },
+  {
+    img: country,
+    alt: "Country fit dancers",
+    caption: "The Country Fit dancers in their club tops",
+  },
+  {
+    img: disney,
+    alt: "Hen do with disney character",
+    caption: "A Disney-themed hen",
+  },
+  {
+    img: clonmany,
+    alt: "Clonmany green and red tops",
+    caption: "Clonmany, kitted out in green and red",
+  },
+  {
+    img: keren,
+    alt: "Hen tops with cocktail glasses",
+    caption: "Disney hen night, all in matching tops",
+  },
 ];
 
-const inks = [
-  "ink-royal",
-  "ink-plum",
-  "ink-pine",
-  "ink-cobalt",
-  "ink-grape",
-  "ink-denim",
-  "ink-lagoon",
+const tapes = [tapeOne, tapeTwo];
+
+const tickerWords = [
+  "Workwear",
+  "Hens",
+  "Stags",
+  "Clubs",
+  "Grads",
+  "Fitness",
+  "Totes",
+  "Teddies",
 ];
 
-const pageRef =
-  "inline-block bg-ink px-2 font-label text-sm font-bold tracking-label text-paper uppercase no-underline hover:bg-royal hover:text-white";
-
-const plateSpan = [
-  "col-span-2 lg:col-span-6",
-  "lg:col-span-3",
-  "lg:col-span-3",
+const printTilts = [
+  "-rotate-3",
+  "rotate-2",
+  "-rotate-1",
+  "rotate-3",
+  "-rotate-2",
 ];
+const printOffsets = ["lg:mt-0", "lg:mt-8", "lg:mt-2", "lg:mt-16", "lg:mt-4"];
+
+const heroFigureNumber = 1;
+const firstCardFigureNumber = heroFigureNumber + 1;
+const posterFigureNumber = firstCardFigureNumber + cards.length;
+const firstCustomerFigureNumber = posterFigureNumber + 1;
 
 export const Route = createFileRoute("/")({
   component: HomeRoute,
 });
 
+const TickerGroup = ({ hidden = false }: { hidden?: boolean }) => (
+  <ul className="ticker-group" aria-hidden={hidden || undefined}>
+    {tickerWords.map((word) => (
+      <li key={word}>
+        {word}
+        <span aria-hidden="true">✦</span>
+      </li>
+    ))}
+  </ul>
+);
+
 function HomeRoute() {
   return (
-    <main className="mx-auto w-full max-w-sheet px-gutter pb-12 mt-4">
-      <article className="ink-noise relative grid gap-x-8 gap-y-6 overflow-hidden border-2 border-ink bg-blush p-gutter lg:grid-cols-12">
-        <div
-          aria-hidden="true"
-          className="rough-edges ink-overlap absolute -top-8 right-8 size-40 rounded-full bg-tangerine lg:size-64"
-        />
-        <div
-          aria-hidden="true"
-          className="motif-lines rough-edges absolute right-0 bottom-0 hidden h-48 w-32 text-denim lg:block"
-        />
+    <main>
+      <div className="sheet mt-4">
+        <section className="frame grid gap-8 bg-blush p-10 text-ink lg:grid-cols-5 lg:items-center lg:p-8">
+          <div className="lg:order-2 lg:col-span-3">
+            <h1 className="hyphens-none">
+              No minimum
+              <br className="max-xl:hidden" /> order.
+            </h1>
+            <p className="mb-4 text-2xl italic">
+              There are enough rules in life. That&apos;s showbiz baby!
+            </p>
+            <p className="button mb-4">T-shirts from €20 · Hoodies from €35</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link to="/contact" className="button">
+                Get a quote →
+              </Link>
+              <PageLink to="/prints">See the prints</PageLink>
+            </div>
+          </div>
 
-        <figure className="relative m-0 lg:col-span-5">
-          <div className="ink-royal border-2 border-ink">
-            <div>
+          <div className="relative w-fit lg:order-1 lg:col-span-2">
+            <div aria-hidden="true" className="halftone-fade" />
+            <Figure
+              n={heroFigureNumber}
+              label="Mr. Savage himself"
+              className="relative"
+            >
+              {/* TODO(owner): self-portrait.png is the only off-palette element on the site (salmon and light blue fills). Ask about a riso recolour. */}
               <img
                 src="/self-portrait.png"
                 alt="Self portrait"
                 fetchPriority="high"
-                className="aspect-square w-full object-fit"
+                className="size-72 object-contain lg:size-80"
               />
-            </div>
+            </Figure>
           </div>
-          <figcaption className="mt-2 font-label text-sm tracking-label uppercase">
-            Fig. 1 — Mr. Savage
-          </figcaption>
-        </figure>
+        </section>
+      </div>
 
-        <div className="relative z-10 flex gap-6 lg:col-span-7">
-          <div className="flex-1">
-            <p className="outline-title mb-4 text-royal">
-              No minimum
-              <br />
-              order
+      <div className="ticker mt-8" aria-label="Who we print for">
+        <div className="ticker-track">
+          <TickerGroup />
+          <TickerGroup hidden />
+        </div>
+      </div>
+
+      <div className="sheet">
+        <section className="frame mt-16 grid md:grid-cols-2 xl:grid-cols-3">
+          <article className="p-8 md:col-span-2 xl:col-span-1">
+            <h2>From sketch to sleeve</h2>
+            <p className="dropcap">
+              Over 10 years of design and garment printing means we can draw the
+              logo, make a sample, and print the finished garment using
+              whichever method suits it best.
             </p>
-            <h1 className="headline misregister ink-flamingo mb-4 text-royal">
-              There are <span className="text-flamingo">enough</span>{" "}
-              <span className="highlight">rules</span> in life.
-            </h1>
-            <p className="mb-6 max-w-prose text-xl italic">
-              One hoodie or a hundred, the answer is yes. This is showbiz baby!
+            <PageLink to="/about">How we print</PageLink>
+          </article>
+          <article className="tile-divider relative bg-cobalt p-8 text-paper">
+            <img
+              src={eireStamp}
+              alt=""
+              aria-hidden="true"
+              className="eire-stamp absolute top-4 right-4 size-28"
+            />
+            <h2 className="pr-28">Irish owned</h2>
+            <p>
+              We take pride in where we are from and what we do. By supporting
+              us you are supporting local. Tabhair aire duit féin (look after
+              yourself) and skip the mega online marketplaces.
+            </p>
+            <PageLink to="/about">About us</PageLink>
+          </article>
+          <article className="tile-divider tile-divider-pair bg-lemon-yellow p-8">
+            <h2>Ready when you need it</h2>
+            {/* TODO(owner): confirm the number of working days with the owner, then restore the "Fast turnaround" heading with that number. Do not invent one. */}
+            <p>
+              Tell us the date — a hen, a match, a graduation — and we&apos;ll
+              work back from it.
+            </p>
+            <PageLink to="/about">FAQs</PageLink>
+          </article>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="mb-8">What we can do</h2>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {cards.map(({ img, label }, index) => (
+              <Figure
+                key={label}
+                n={firstCardFigureNumber + index}
+                label={label}
+                className={
+                  index === 0
+                    ? "col-span-2 lg:row-span-2"
+                    : index === cards.length - 1
+                      ? "col-span-2 lg:col-span-1"
+                      : ""
+                }
+              >
+                <img
+                  src={img}
+                  alt={label}
+                  width={720}
+                  height={720}
+                  loading="lazy"
+                  className={`w-full object-cover ${index === 0 ? "aspect-square lg:aspect-auto lg:min-h-0 lg:flex-1" : "aspect-square"}`}
+                />
+              </Figure>
+            ))}
+            <Figure
+              n={posterFigureNumber}
+              label="Poster prints"
+              className="max-sm:col-span-2"
+            >
+              <div className="flex aspect-square max-sm:aspect-auto flex-col justify-between gap-4 grain bg-fluoro-pink p-4 text-ink">
+                <p className="mb-0 font-chango text-3xl leading-tight lg:max-xl:text-xl">
+                  “Be Grand Hi!”
+                </p>
+                <p className="mb-0 font-chango text-3xl leading-tight lg:max-xl:text-xl">
+                  “That&apos;s a Holy Tarra”
+                </p>
+                <p className="label mb-0">Irish sayings on paper</p>
+              </div>
+            </Figure>
+          </div>
+          <div className="mt-8">
+            <PageLink to="/prints">View more</PageLink>
+          </div>
+        </section>
+
+        <section className="frame shadow-hard mt-16 grid gap-8 bg-lemon-yellow p-8 text-ink lg:grid-cols-2 lg:items-center">
+          <p className="poster-line mb-0">
+            One hoodie
+            <br />
+            or a hundred
+          </p>
+          <div>
+            <p className="price-line mb-2">T-shirts from €20–25</p>
+            <p className="price-line mb-4">Jumpers &amp; hoodies from €35</p>
+            <p>
+              Rough starting prices, with no minimum order. Tell us what you
+              need and we&apos;ll work out the rest.
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <Link to="/prints" className={pageRef}>
-                See the prints, P.2
+              <Link to="/contact" className="button button-paper">
+                Contact us →
               </Link>
-
-              <Link to="/contact" className="press-button">
-                Get a quote →
-              </Link>
+              <a
+                href="https://wa.me/353872105305"
+                target="_blank"
+                rel="noreferrer"
+                className="page-link"
+              >
+                WhatsApp us
+              </a>
             </div>
           </div>
-          <p
-            aria-hidden="true"
-            className="vertical-text hidden shrink-0 border-l border-ink pl-4 font-label text-sm tracking-label uppercase sm:block"
-          >
-            Hens · Stags · Clubs · Crews
-          </p>
-        </div>
-      </article>
+        </section>
 
-      <section className="grid border-x-2 border-b-2 border-ink lg:grid-cols-12">
-        <article className="ink-noise bg-lemon p-6 lg:col-span-6">
-          <h2 className="mb-3 text-3xl">From sketch to sleeve</h2>
-          <p className="dropcap sm:columns-2 sm:gap-8">
-            Over 10 years of design and garment printing means we can draw the
-            logo, make a sample, and print the finished garment using whichever
-            method suits it best.
-          </p>
-          <Link to="/about" className={pageRef}>
-            How we print, P.3
-          </Link>
-        </article>
-        <article className="ink-noise border-t-2 border-ink bg-royal p-6 text-white lg:col-span-3 lg:border-t-0 lg:border-l-2">
-          <h2 className="mb-3 text-2xl">Irish Owned</h2>
-          <p>
-            We take pride in where we are from and what we do. By supporting us
-            you are supporting local. Tabhair aire duit féin (look after
-            yourself) and skip the mega online marketplaces.
-          </p>
-          <Link to="/about" className={pageRef}>
-            About us, P.3
-          </Link>
-        </article>
-        <article className="ink-noise border-t-2 border-ink bg-salmon p-6 lg:col-span-3 lg:border-t-0 lg:border-l-2">
-          <h2 className="mb-3 text-2xl">Highest Quality &amp; Service</h2>
-          <p>
-            We promise to work with you to provide the perfect solution for you
-            or your business. From the apparel to the design, we got your back.
-          </p>
-          <Link to="/about" className={pageRef}>
-            FAQs, P.3
-          </Link>
-        </article>
-      </section>
-
-      <section className="py-8">
-        <h2 className="headline misregister ink-bubblegum mb-6 text-denim">
-          What We Can Do
-        </h2>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-12">
-          {cards.map(({ img, label }, index) => (
-            <figure
-              key={label}
-              className={`m-0 ${plateSpan[index] ?? "lg:col-span-3"} ${index % 2 === 0 ? "lg:-rotate-1" : "lg:rotate-1"}`}
-            >
-              <div
-                className={`border-2 border-ink ${inks[index % inks.length]}`}
+        <section className="mt-16">
+          <h2 className="mb-8">Some of our happy customers</h2>
+          <div className="grid grid-cols-2 items-start gap-8 lg:grid-cols-5 lg:gap-4">
+            {customers.map(({ img, alt, caption }, index) => (
+              <Figure
+                key={alt}
+                n={firstCustomerFigureNumber + index}
+                label={caption}
+                italic
+                className={`${printTilts[index]} ${printOffsets[index]}`}
               >
-                <div>
+                <div className="photo-print group">
                   <img
-                    src={img}
-                    alt={label}
-                    width={720}
-                    height={720}
-                    loading="lazy"
-                    className={`w-full object-cover ${index === 0 ? "aspect-3/2" : "aspect-square"}`}
-                  />
-                </div>
-              </div>
-              <figcaption className="mt-1 font-label text-sm tracking-label uppercase">
-                Fig. {index + 2} — {label}
-              </figcaption>
-            </figure>
-          ))}
-          <figure className="col-span-2 m-0 lg:col-span-6 lg:-rotate-1">
-            <div className="ink-noise ink-plum flex flex-col border-2 border-ink bg-chartreuse p-6 lg:aspect-2/1">
-              <div className="flex flex-1 flex-col justify-between gap-4">
-                <div className="flex items-start justify-between gap-4">
-                  <p className="kicker w-fit">Irish sayings on paper</p>
-                  <div
+                    src={tapes[index % tapes.length]}
+                    alt=""
                     aria-hidden="true"
-                    className="rough-edges ink-overlap size-16 shrink-0 rounded-full bg-plum lg:size-24"
+                    className="tape"
                   />
+                  <div
+                    className={`halftone ${index % 2 === 0 ? "" : "halftone-flip"}`}
+                  >
+                    <img
+                      src={img}
+                      alt={alt}
+                      loading="lazy"
+                      className="block aspect-4/5 w-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                    />
+                  </div>
                 </div>
-                <p className="headline misregister-2 mb-0 text-3xl sm:text-4xl">
-                  Be Grand Hi!
-                </p>
-                <p className="headline misregister-3 mb-0 text-3xl sm:text-4xl">
-                  That&apos;s a Holy Tarra
-                </p>
-              </div>
-            </div>
-            <figcaption className="mt-1 font-label text-sm tracking-label uppercase">
-              Fig. 10 — Poster prints
-            </figcaption>
-          </figure>
-        </div>
-        <Link
-          to="/prints"
-          className="mt-6 flex min-h-11 items-center justify-center border-2 border-ink bg-lemon p-4 text-center font-label tracking-label text-ink uppercase no-underline hover:bg-ink hover:text-paper"
-        >
-          View more, P.2
-        </Link>
-      </section>
-
-      <section className="grid border-2 border-ink md:grid-cols-2">
-        <article className="ink-noise bg-chartreuse p-6">
-          <h2 className="mb-3 text-2xl">Vinyl Transfer</h2>
-          <p className="mb-0">
-            Cut vinyl as small as 3mm, layered up to 5 colours. Max print size
-            300mm wide x 500mm high.
-          </p>
-        </article>
-        <article className="ink-noise border-t-2 border-ink bg-lilac p-6 md:border-t-0 md:border-l-2">
-          <h2 className="mb-3 text-2xl">Direct To Garment</h2>
-          <p className="mb-0">
-            Unlimited colours on 80-100% cotton blend clothing. Max print size
-            340mm wide x 400mm high.
-          </p>
-        </article>
-      </section>
-
-      <section className="py-8">
-        <h2 className="headline misregister ink-lemon mb-6 text-kelly">
-          Some Of Our Happy Customers
-        </h2>
-        <div className="grid grid-cols-2 items-start gap-4 lg:grid-cols-5">
-          {customers.map(({ img, label }, index) => (
-            <figure
-              key={label}
-              className={`m-0 ${index % 2 === 1 ? "lg:mt-8" : ""}`}
-            >
-              <div
-                className={`halftone border border-ink ${inks[(index + 3) % inks.length]}`}
-              >
-                <div>
-                  <img
-                    src={img}
-                    alt={label}
-                    loading="lazy"
-                    className="aspect-4/5 w-full object-cover"
-                  />
-                </div>
-              </div>
-              <figcaption className="mt-1 text-sm italic">{label}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <aside className="ink-noise misregister-panel ink-lemon mx-auto max-w-2xl border-2 border-ink bg-aqua p-8 text-center">
-        <p className="mb-2 font-display text-2xl font-black">
-          T-shirts from €20-25 · Jumpers &amp; hoodies from €35
-        </p>
-        <p className="mb-4">
-          Rough starting prices. Tell us what you need and we&apos;ll work out
-          the rest.
-        </p>
-        <Link to="/contact" className="press-button">
-          Contact us →
-        </Link>
-      </aside>
+              </Figure>
+            ))}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

@@ -15,6 +15,8 @@ import appCss from "styles/index.css?url";
 const title = "That's Savage";
 const description =
   "Custom garment printing and graphic design from Monaghan. No minimum order — one hoodie or a hundred.";
+const googleFontsHref =
+  "https://fonts.googleapis.com/css2?family=Chango&family=Oswald:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap";
 const image = "https://thatssavage.ie/self-portrait.png";
 
 export const Route = createRootRoute({
@@ -36,6 +38,13 @@ export const Route = createRootRoute({
       { name: "image", content: image },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      { rel: "stylesheet", href: googleFontsHref },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "icon", href: "/icon-192.png", type: "image/png" },

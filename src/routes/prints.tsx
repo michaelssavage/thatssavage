@@ -18,7 +18,7 @@ const collagePics = [
     title: "Parties",
     description:
       "Hen & Stag parties, seasonal printing, funny and special occasion prints",
-    tint: "bg-lemon",
+    tint: "bg-lemon-yellow text-ink",
     collagePic: partyCollage,
     images: clothesImages,
   },
@@ -26,7 +26,7 @@ const collagePics = [
     title: "Fitness",
     description:
       "GAA Club logos, fitness t-shirts, Rugby Teams, Gym Equipment, 5-a-side",
-    tint: "bg-aqua",
+    tint: "bg-cobalt text-paper",
     collagePic: fitnessCollage,
     images: fitnessImages,
   },
@@ -34,21 +34,21 @@ const collagePics = [
     title: "Outerwear",
     description:
       "Masks, neck ties, hats, snoods, shorts, tote bags, school bags",
-    tint: "bg-salmon",
+    tint: "bg-fluoro-pink text-ink",
     collagePic: maskCollage,
     images: otherWear,
   },
   {
     title: "Workwear",
     description: "Aprons, bodywarmers, jackets, hi-vis jackets",
-    tint: "bg-chartreuse",
+    tint: "text-ink",
     collagePic: workWearCollage,
     images: workWear,
   },
   {
     title: "Miscellaneous",
     description: "Water bottles, wallets, umbrellas, slippers, yoga mats",
-    tint: "bg-lilac",
+    tint: "bg-lemon-yellow text-ink",
     collagePic: miscCollage,
     images: miscArray,
   },
@@ -72,19 +72,26 @@ export const Route = createFileRoute("/prints")({
 
 function PrintsRoute() {
   return (
-    <main className="mx-auto w-full max-w-sheet px-gutter pb-12">
+    <main className="sheet">
       <header className="py-8">
-        <h1 className="headline misregister ink-flamingo mb-4 text-royal">
-          Prints
-        </h1>
+        <h1>Prints</h1>
         <p className="mb-0 max-w-prose text-xl italic">
           Hard to beat prices for every printing occasion. Open a card to see
           more!
         </p>
       </header>
       <div className="flex flex-col gap-4">
-        {collagePics.map((collage) => (
-          <CollagePic key={collage.title} collage={collage} />
+        {collagePics.map((collage, index) => (
+          <CollagePic
+            key={collage.title}
+            collage={collage}
+            firstFigureNumber={
+              1 +
+              collagePics
+                .slice(0, index)
+                .reduce((total, { images }) => total + images.length, 0)
+            }
+          />
         ))}
       </div>
     </main>

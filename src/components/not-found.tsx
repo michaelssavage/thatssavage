@@ -1,20 +1,11 @@
-import { Link } from "@tanstack/react-router";
+import { PageLink } from "components/page-link";
 
 export function NotFound() {
   return (
-    <main className="mx-auto w-full max-w-sheet px-gutter pb-12">
-      <article className="ink-noise border-2 border-ink bg-blush p-gutter">
-        <p className="mb-4 font-label text-sm tracking-label uppercase">
-          Error 404
-        </p>
-        <h1 className="headline mb-4 text-royal">This page does not exist</h1>
-
-        <Link
-          to="/"
-          className="inline-block bg-ink px-4 py-2 font-label text-sm font-bold tracking-label text-paper uppercase no-underline hover:bg-royal hover:text-white"
-        >
-          Back home
-        </Link>
+    <main className="sheet mt-8">
+      <article className="frame p-8">
+        <h1>404: this page does not exist</h1>
+        <PageLink to="/">Back home</PageLink>
       </article>
     </main>
   );

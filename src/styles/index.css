@@ -1,517 +1,532 @@
 @import "tailwindcss";
 @import "react-toastify/dist/ReactToastify.css";
+@import "./tokens.css";
 
-/* Self-hosted fonts (Latin + Latin-Extended cover the Irish fada). */
-@import "@fontsource/chango/latin-400.css";
-@import "@fontsource/chango/latin-ext-400.css";
-@import "@fontsource/bungee-inline/latin-400.css";
-@import "@fontsource/bungee-inline/latin-ext-400.css";
-@import "@fontsource/playfair-display/latin-700.css";
-@import "@fontsource/playfair-display/latin-ext-700.css";
-@import "@fontsource/playfair-display/latin-900.css";
-@import "@fontsource/playfair-display/latin-ext-900.css";
-@import "@fontsource/playfair-display/latin-900-italic.css";
-@import "@fontsource/playfair-display/latin-ext-900-italic.css";
-@import "@fontsource-variable/newsreader/opsz.css";
-@import "@fontsource-variable/newsreader/opsz-italic.css";
-@import "@fontsource-variable/oswald/wght.css";
-
-@theme {
-  --color-paper: #ffffff;
-  --color-paper-shade: #e8debf;
-  --color-ink: #141210;
-  --color-yellow: #ffdd17;
-  --color-tomato: #e4472b;
-
-  /* Riso ink palette (AGENTS.md). Black and white come from Tailwind. */
-  --color-blush: #f2cdcf;
-  --color-lemon: #ffe800;
-  --color-chartreuse: #e3ed55;
-  --color-cornflower: #62a8e5;
-  --color-cobalt: #0078bf;
-  --color-ochre: #bb8b41;
-  --color-stone: #88898a;
-  --color-salmon: #ff8e91;
-  --color-marigold: #ffb511;
-  --color-fern: #67b346;
-  --color-aqua: #5ec8e5;
-  --color-royal: #3255a4;
-  --color-terracotta: #bd6439;
-  --color-bubblegum: #f984ca;
-  --color-tangerine: #ff6c2f;
-  --color-kelly: #00a95c;
-  --color-seafoam: #82d8d5;
-  --color-denim: #3d5588;
-  --color-mulberry: #914e72;
-  --color-flamingo: #ff48b0;
-  --color-coral: #ff7477;
-  --color-pine: #407060;
-  --color-jade: #00aa93;
-  --color-grape: #765ba7;
-  --color-plum: #9e4c6e;
-  --color-watermelon: #f15060;
-  --color-poppy: #ff665e;
-  --color-lagoon: #00838a;
-  --color-peacock: #009da5;
-  --color-lilac: #9d7ad2;
-  --color-moss: #b49f29;
-
-  /* One job per family. */
-  --font-masthead: "Chango", "Arial Black", sans-serif;
-  --font-outline: "Bungee Inline", "Arial Black", sans-serif;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Newsreader Variable", Georgia, serif;
-  --font-label: "Oswald Variable", "Arial Narrow", sans-serif;
-  --default-font-family: var(--font-body);
-  --tracking-label: 0.08em;
-
-  /* Fluid type. */
-  --text-masthead: clamp(3.5rem, 15vw, 14rem);
-  --text-masthead--line-height: 0.85;
-  --text-masthead--letter-spacing: -0.02em;
-  --text-headline: clamp(2rem, 5vw, 4.5rem);
-  --text-headline--line-height: 0.95;
-  --text-headline--letter-spacing: -0.02em;
-
-  /* Layout: 8px base, fluid gutter, capped sheet. */
-  --spacing-gutter: clamp(16px, 3vw, 40px);
-  --container-sheet: 1360px;
-
-  /* Hard offsets only, never blur. */
-  --shadow-hard: 3px 3px 0 var(--color-ink);
-  --shadow-hard-tomato: 3px 3px 0 var(--color-tomato);
-
-  /* Legacy tokens: keep unconverted pages looking as they do today. Remove each as its page is converted. */
-  --color-yellow-dark: #ff9900;
-  --color-charcoal: #343a40;
-  --color-charcoal-dark: #242222;
-  --color-silver: #a7a9ab;
-
-  --breakpoint-xs: 30rem; /* 480px */
+@utility shadow-hard {
+  box-shadow: var(--shadow-hard);
 }
 
-/* Centred, padded container. Max widths come from Tailwind's default breakpoints. */
-@utility container {
+@utility misprint {
+  text-shadow: var(--misprint);
+}
+
+@utility misprint-double {
+  text-shadow: var(--misprint-double);
+}
+
+@utility sheet {
+  width: 100%;
+  max-width: var(--container-sheet);
   margin-inline: auto;
-  padding-inline: 0.75rem;
+  padding-inline: var(--space-2);
+  @media (width >= theme(--breakpoint-md)) {
+    padding-inline: var(--space-4);
+  }
 }
 
-@utility vertical-text {
-  writing-mode: vertical-rl;
-}
-
-/* Sets the second ink used by the print effects: ink-tangerine, ink-royal, ... */
-@utility ink-* {
-  --ink: --value(--color-*);
-}
-
-/* Base typography: the defaults the site relied on before Tailwind's preflight reset them. */
 @layer base {
+  :root {
+    --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   html {
+    background-color: var(--paper);
     overscroll-behavior: none;
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    font-size: 1.0625rem;
-    line-height: 1.5;
+    color: var(--ink);
+    font-family: var(--font-newsreader);
+    font-size: 18px;
+    line-height: 28px;
     text-wrap: pretty;
   }
 
-  /* Paper grain: one fixed overlay of tiled feTurbulence noise, about 6% opacity. */
+  /* Paper grain: the only textured surface. Sits behind everything; paper-coloured areas stay transparent. */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: -1;
     pointer-events: none;
-    opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+    background-image: var(--grain-image);
     background-size: 160px 160px;
   }
 
-  /* Visible focus on every interactive element. */
   :focus-visible {
-    outline: 3px solid var(--color-tomato);
+    outline: 3px solid var(--ink);
     outline-offset: 2px;
   }
 
+  footer :focus-visible {
+    outline-color: var(--lemon-yellow);
+  }
+
   ::selection {
-    background-color: var(--color-yellow);
-    color: var(--color-ink);
+    background-color: var(--lemon-yellow);
+    color: var(--ink);
   }
 
   h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h2 {
     margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-chango);
+    font-weight: 400;
+    hyphens: auto;
+    overflow-wrap: break-word;
     text-wrap: balance;
   }
+
   h1 {
-    font-size: calc(1.375rem + 1.5vw);
+    font-size: 40px;
+    line-height: 1.05;
+    text-shadow: var(--misprint);
+    @media (width >= theme(--breakpoint-md)) {
+      font-size: 64px;
+    }
   }
+
   h2 {
-    font-size: calc(1.325rem + 0.9vw);
+    font-size: 32px;
+    line-height: 1.1;
+    @media (width >= theme(--breakpoint-md)) {
+      font-size: 36px;
+    }
   }
-  h3 {
-    font-size: calc(1.3rem + 0.6vw);
-  }
+
+  h3,
   h4 {
-    font-size: calc(1.275rem + 0.3vw);
-  }
-  h5 {
-    font-size: 1.25rem;
-  }
-  h6 {
-    font-size: 1rem;
-  }
-  @media (width >= theme(--breakpoint-xl)) {
-    h1 {
-      font-size: 2.5rem;
-    }
-    h2 {
-      font-size: 2rem;
-    }
-    h3 {
-      font-size: 1.75rem;
-    }
-    h4 {
-      font-size: 1.5rem;
-    }
+    margin-top: 0;
+    margin-bottom: var(--space-1);
+    font-family: var(--font-oswald);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-wrap: balance;
   }
 
   p {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-2);
   }
 
   ul,
   ol {
     margin-top: 0;
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-  }
-
-  hr {
-    margin: 1rem 0;
-    opacity: 0.25;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
   }
 
   a {
-    color: var(--color-ink);
+    color: inherit;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 
+  button:not(:disabled),
   [role="button"],
-  button:not(:disabled) {
+  summary {
     cursor: pointer;
   }
 }
 
 @layer components {
-  /* Legacy (mimics Bootstrap for unconverted pages): delete with the last page that uses it. */
-  .card {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    border: 1px solid rgb(0 0 0 / 0.175);
-    border-radius: 0.375rem;
-    background-color: #fff;
-  }
-
-  /* ---- The Savage Gazette: repeated print patterns ---- */
-
-  /* Section kicker: small Oswald label with a 3px bar under it. */
-  .kicker {
-    display: block;
-    padding-bottom: 0.25rem;
-    border-bottom: 3px solid var(--color-ink);
-    font-family: var(--font-label);
-    font-size: 0.875rem;
+  /* Oswald label: nav, buttons, date line, captions, page tags. */
+  .label {
+    font-family: var(--font-oswald);
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.08em;
+    line-height: 16px;
     text-transform: uppercase;
   }
 
-  /* Double rule: 3px bar, 3px gap, 1px hairline. Use under the masthead and above the footer. */
+  .caption {
+    font-size: 15px;
+    font-style: italic;
+    line-height: 22px;
+  }
+
+  .poster-line {
+    font-family: var(--font-oswald);
+    font-size: clamp(48px, 7.2vw, 92px);
+    font-weight: 700;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .price-line {
+    font-family: var(--font-oswald);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .tile-divider {
+    border-top: var(--border-frame);
+    @media (width >= theme(--breakpoint-xl)) {
+      border-top: 0;
+      border-left: var(--border-frame);
+    }
+  }
+
+  .terms ul {
+    list-style: disc;
+  }
+
+  .field {
+    display: block;
+    width: 100%;
+    padding: var(--space-1) var(--space-2);
+    border: var(--border-frame);
+    background-color: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    &::placeholder {
+      color: var(--ink-muted);
+    }
+    &[aria-invalid="true"] {
+      box-shadow: 4px 4px 0 var(--fluoro-pink);
+    }
+  }
+
+  .tile-divider-pair {
+    @media (width >= theme(--breakpoint-md)) {
+      border-left: var(--border-frame);
+    }
+  }
+
+  .tile-divider-top {
+    border-top: var(--border-frame);
+  }
+
+  .rule-hairline {
+    border-top: var(--border-hairline);
+  }
+
+  .frame {
+    border: var(--border-frame);
+  }
+
+  /* Double rule: two 1px lines, 3px apart. */
   .rule-double {
-    border-top: 3px solid var(--color-ink);
+    border-top: var(--border-hairline);
     &::before {
       content: "";
       display: block;
       margin-top: 3px;
-      border-top: 1px solid var(--color-ink);
+      border-top: var(--border-hairline);
     }
   }
 
-  /* Oval page-number badge (P.2), borrowed from the Popeye cover. */
-  .badge-page {
-    display: inline-block;
-    padding: 0 0.6em;
-    border: 2px solid var(--color-ink);
-    border-radius: 999px;
-    background-color: var(--color-yellow);
-    color: var(--color-ink);
-    font-family: var(--font-label);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1.5;
+  .test-strip {
+    display: flex;
+    outline: 1px solid var(--ink);
+    & > span {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  /* Masthead: Chango 112px, fitted to the sheet width when narrower; wraps to two lines on phones. */
+  .masthead-link {
+    display: block;
+    container-type: inline-size;
+  }
+  .masthead-word {
+    display: block;
+    font-family: var(--font-chango);
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    text-align: center;
+    text-shadow: var(--misprint);
     text-transform: uppercase;
-    white-space: nowrap;
+    @media (width >= theme(--breakpoint-sm)) {
+      font-size: min(112px, calc(100cqw / 12.4));
+      white-space: nowrap;
+    }
   }
 
-  /* Tomato page reference (24px+ bold only, or use on a tomato fill). */
-  .page-ref {
-    font-family: var(--font-label);
-    font-weight: 700;
+  /* Buttons */
+  .button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border: var(--border-frame);
+    background-color: var(--lemon-yellow);
+    box-shadow: var(--shadow-hard);
+    color: var(--ink);
+    font-family: var(--font-oswald);
+    font-size: 13px;
+    font-weight: 600;
     letter-spacing: 0.08em;
+    line-height: 16px;
+    text-decoration: none;
     text-transform: uppercase;
-    color: var(--color-tomato);
+    &:is(a, button):hover {
+      background-color: var(--ink);
+      color: var(--paper);
+    }
+    &:is(a, button):active {
+      box-shadow: var(--shadow-hard-pressed);
+      transform: translate(2px, 2px);
+    }
+    &:disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   }
 
-  /* Highlighter bar behind one key phrase per story. */
-  .highlight {
-    background: linear-gradient(transparent 55%, var(--color-yellow) 55%);
+  .button-paper {
+    background-color: var(--paper);
   }
 
-  /* ---- Print effects. Set --ink on the element to change the second colour. ---- */
-
-  /* Misregistration, text: offset second ink on 1-2 big headlines per page. Never on body or labels. */
-  .misregister {
-    text-shadow: 3px 3px 0 var(--ink, var(--color-tomato));
+  /* Internal page link, "See the prints, P.2": paper on an ink box. */
+  .page-link {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    background-color: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-oswald);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover {
+      background-color: var(--paper);
+      box-shadow: inset 0 0 0 3px var(--ink);
+      color: var(--ink);
+    }
   }
 
-  .misregister-2 {
-    text-shadow: 3px 3px 0 var(--denim, var(--color-flamingo));
+  .page-tag {
+    padding: 0 var(--space-1);
+    border: var(--border-hairline);
+    line-height: 20px;
   }
 
-  .misregister-3 {
-    text-shadow: 3px 3px 0 var(--tangerine, var(--color-jade));
+  /* Registration marks and halftone fade in the hero. */
+  .halftone-fade {
+    position: absolute;
+    top: -32px;
+    right: -32px;
+    width: 70%;
+    aspect-ratio: 1;
+    background: radial-gradient(
+        circle at center,
+        var(--cobalt) 2px,
+        transparent 2.5px
+      )
+      0 0 / 9px 9px;
+    mask-image: radial-gradient(
+      circle at 70% 30%,
+      var(--ink) 10%,
+      transparent 70%
+    );
   }
 
-  /* Misregistration, panel: a second colour layer printed slightly off, multiplied over the first. */
-  .misregister-panel {
+  .dropcap::first-letter {
+    float: left;
+    margin: 4px 8px 0 0;
+    font-family: var(--font-chango);
+    font-size: 56px;
+    line-height: 0.85;
+  }
+
+  /* Ticker */
+  .ticker {
+    overflow: hidden;
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 40s linear infinite;
+  }
+  .ticker-group {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-1) var(--space-1);
+    list-style: none;
+    font-family: var(--font-oswald);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 32px;
+    text-transform: uppercase;
+    & > li {
+      display: flex;
+      gap: var(--space-2);
+    }
+    & > li:nth-child(odd) > span {
+      color: var(--lemon-yellow);
+    }
+    & > li:nth-child(even) > span {
+      color: var(--fluoro-pink);
+    }
+  }
+
+  /* Photo prints */
+  .photo-print {
+    position: relative;
+    padding: 10px 10px 14px;
+    border: var(--border-hairline);
+    background-color: var(--paper);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .tape {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    z-index: 1;
+    width: 128px;
+    height: auto;
+    margin-left: -64px;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Subtle two-ink halftone over a photo: cobalt and pink dot screens printed over a greyscale photo, offset like a misregistered print, fading out toward the middle. */
+  .halftone {
     position: relative;
     isolation: isolate;
-    &::before {
+    &::before,
+    &::after {
       content: "";
       position: absolute;
       inset: 0;
-      z-index: -1;
-      translate: 8px 8px;
-      background-color: var(--ink, var(--color-tomato));
-      mix-blend-mode: multiply;
+      z-index: 1;
+      opacity: 0.6;
+      pointer-events: none;
+      transition: opacity 150ms;
+    }
+    .group:hover &::before,
+    .group:hover &::after {
+      opacity: 0;
+    }
+    &::before {
+      background: radial-gradient(
+          circle at center,
+          var(--cobalt) 1.5px,
+          transparent 2px
+        )
+        0 0 / 8px 8px;
+      mask-image: linear-gradient(to top right, var(--ink) 0, transparent 45%);
+    }
+    &::after {
+      background: radial-gradient(
+          circle at center,
+          var(--fluoro-pink) 1.5px,
+          transparent 2px
+        )
+        4px 4px / 8px 8px;
+      mask-image: linear-gradient(
+        to bottom left,
+        var(--ink) 0,
+        transparent 45%
+      );
+    }
+  }
+  .halftone-flip::before {
+    mask-image: linear-gradient(to bottom left, var(--ink) 0, transparent 45%);
+  }
+  .halftone-flip::after {
+    mask-image: linear-gradient(to top right, var(--ink) 0, transparent 45%);
+  }
+
+  /* One quick spin on hover, then back to its tilt. */
+  .stamp-spin {
+    rotate: -6deg;
+    &:hover {
+      animation: spin-once 600ms ease-out;
     }
   }
 
-  /* Duotone halftone: grayscale photo screened onto --ink with a faint dot screen, so the product stays readable. Pick a dark ink. Markup: <div class="halftone"><div><img /></div></div>. */
-  .halftone {
-    isolation: isolate;
-    background-color: var(--ink, var(--color-royal));
-    mix-blend-mode: multiply;
-    & > div {
-      position: relative;
-      mix-blend-mode: screen;
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at center, #bbb 0, #fff 70%) 0 0 /
-          6px 6px;
-        mix-blend-mode: multiply;
-      }
-    }
-    & img {
-      display: block;
-      filter: grayscale(1) contrast(1.15);
-    }
-  }
-
-  /* Collapsible card: a <details> whose summary hides the browser marker. Give related cards the same name so one opens at a time. */
-  .fold > summary {
-    list-style: none;
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  /* Ink overlap: print one colour over another; the overlap darkens. */
-  .ink-overlap {
-    mix-blend-mode: multiply;
-  }
-
-  /* Rough edges: wobbles the outline of shapes and illustrations. Never on text or photos. */
-  .rough-edges {
-    filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04' numOctaves='3' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='8'/%3E%3C/filter%3E%3C/svg%3E#r");
-  }
-
-  /* Ink noise: unprinted paper specks across a large colour area. */
-  .ink-noise {
+  /* Paper grain on a coloured block (the poster tile). */
+  .grain {
     position: relative;
     isolation: isolate;
     &::after {
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 1;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .92 0 0 0 0 .82 6 0 0 0 -3.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-      opacity: 0.6;
+      opacity: 0.15;
+      mix-blend-mode: multiply;
+      background-image: var(--grain-image);
+      background-size: 160px 160px;
     }
   }
 
-  /* Hand-cut line texture, as in the cut-paper Celtic illustrations. Lines take the current text colour. */
-  .motif-lines {
-    background-image:
-      repeating-linear-gradient(
-        90deg,
-        currentColor 0 2px,
-        transparent 2px 11px
-      ),
-      repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 17px);
-  }
-
-  /* Bungee Inline feature title: all caps, one per page. */
-  .outline-title {
-    font-family: var(--font-outline);
-    font-size: var(--text-headline);
-    line-height: 0.95;
-    text-transform: uppercase;
-    text-wrap: balance;
-  }
-
-  /* Story headline: Playfair black, tightly tracked. */
-  .headline {
-    font-family: var(--font-display);
-    font-size: var(--text-headline);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-
-  /* Long body copy in newspaper columns (2 at tablet, 3 at desktop). Set lang on the element for hyphenation. */
-  .story-columns {
-    hyphens: auto;
-    column-gap: 2rem;
-    column-rule: 1px solid var(--color-ink);
-    @media (width >= theme(--breakpoint-sm)) {
-      column-count: 2;
-    }
-    @media (width >= theme(--breakpoint-lg)) {
-      column-count: 3;
-    }
-  }
-
-  /* Drop cap on the first paragraph of a lead story only. */
-  .dropcap::first-letter {
-    float: left;
-    margin: 0.05em 0.1em 0 0;
-    font-family: var(--font-display);
-    font-size: 4.5em;
-    font-weight: 900;
-    line-height: 0.8;
-  }
-
-  /* Primary button: yellow, ink border, hard offset on hover. Binary, sharp states. */
-  .press-button {
-    display: inline-flex;
-    min-height: 44px;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.25rem;
-    border: 2px solid var(--color-ink);
-    background-color: var(--color-yellow);
-    color: var(--color-ink);
-    font-family: var(--font-label);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    text-transform: uppercase;
+  /* Stamp that straightens and lifts off the page on hover. */
+  .eire-stamp {
+    rotate: 6deg;
+    transition:
+      rotate 150ms ease-out,
+      scale 150ms ease-out;
     &:hover {
-      color: var(--color-ink);
-      box-shadow: var(--shadow-hard);
-      transform: translate(-3px, -3px);
-    }
-    &:active {
-      background-color: var(--color-paper-shade);
-      box-shadow: none;
-      transform: none;
+      rotate: -3deg;
+      scale: 1.1;
+      filter: drop-shadow(4px 4px 0 var(--ink));
     }
   }
 
-  /* Secondary button: paper fill, inverts on hover. */
-  .press-button-outline {
-    background-color: transparent;
-    &:hover {
-      background-color: var(--color-ink);
-      color: var(--color-paper);
-      box-shadow: none;
-      transform: none;
-    }
-  }
-
-  /* Photos sit on the paper like printed plates. */
-  .print-photo {
-    mix-blend-mode: multiply;
-    filter: contrast(1.05) saturate(0.9);
-  }
-
-  /* Live-text masthead: Chango sized to fill its container (container query units, measured at 10.8em wide on one line, 5.6em for SAVAGE alone). */
-  .masthead {
-    display: block;
-    container-type: inline-size;
-    text-align: center;
-  }
-  .masthead-word {
-    display: block;
-    font-family: var(--font-masthead);
-    font-size: clamp(3.5rem, calc(100cqw / 5.7), 14rem);
-    line-height: var(--text-masthead--line-height);
-    letter-spacing: var(--text-masthead--letter-spacing);
-    white-space: nowrap;
-    @media (width >= theme(--breakpoint-sm)) {
-      font-size: clamp(3.5rem, calc(100cqw / 11), 14rem);
-    }
-  }
-
-  /* CSS-only ticker marquee. Pauses on hover/focus; static, first phrase only, under reduced motion. */
-  .ticker {
+  /* Footer wordmark, cropped by its container. */
+  .footer-wordmark-crop {
+    --wordmark-size: min(15vw, 200px);
+    height: calc(var(--wordmark-size) * 0.62);
     overflow: hidden;
   }
-  .ticker-track {
-    display: flex;
-    width: max-content;
-    animation: ticker 45s linear infinite;
+  .footer-wordmark {
+    font-family: var(--font-chango);
+    font-size: var(--wordmark-size);
+    line-height: 0.8;
+    text-shadow: var(--misprint-double);
   }
-  .ticker:hover .ticker-track,
-  .ticker:focus-within .ticker-track {
-    animation-play-state: paused;
-  }
-  .ticker-group {
-    display: flex;
-    flex-shrink: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+}
 
-  /* Ink-in on load: short clip-path wipe, under 600ms. */
-  .ink-in {
-    animation: ink-in 500ms steps(8, end) both;
+:root {
+  --toastify-color-light: var(--paper);
+  --toastify-color-dark: var(--ink);
+  --toastify-color-info: var(--cobalt);
+  --toastify-color-success: var(--cobalt);
+  --toastify-color-warning: var(--lemon-yellow);
+  --toastify-color-error: var(--fluoro-pink);
+  --toastify-text-color-light: var(--ink);
+  --toastify-font-family: var(--font-oswald);
+}
+
+.Toastify__toast {
+  border: var(--border-frame);
+  border-radius: 0;
+  box-shadow: var(--shadow-hard);
+}
+
+@keyframes spin-once {
+  from {
+    rotate: -6deg;
+  }
+  to {
+    rotate: 354deg;
   }
 }
 
@@ -521,35 +536,26 @@
   }
 }
 
-@keyframes ink-in {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-/* Everything animated is disabled or reduced under reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   .ticker-track {
     animation: none;
     width: auto;
+    justify-content: center;
   }
-  .ticker-group[aria-hidden="true"],
-  .ticker-group > li:not(:first-child) {
-    display: none;
+  .ticker-group {
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .ticker-group > li > [aria-hidden="true"] {
+  .ticker-group[aria-hidden="true"] {
     display: none;
   }
 
   *,
   ::before,
   ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
