@@ -41,6 +41,8 @@ const customers = [
 
 const tapes = [tapeOne, tapeTwo];
 
+const garments = ["T-shirts", "Hoodies", "Jerseys", "Hats"];
+
 const tickerWords = [
   "Workwear",
   "Hens",
@@ -85,7 +87,15 @@ function HomeRoute() {
   return (
     <main>
       <div className="sheet mt-4">
-        <section className="frame grid gap-8 bg-blush p-10 text-ink lg:grid-cols-5 lg:items-center lg:p-8">
+        <section className="frame relative grid gap-8 bg-blush p-10 text-ink md:pr-24 lg:grid-cols-5 lg:items-center lg:p-8 lg:pr-24">
+          <div className="barcode absolute inset-y-8 right-8 max-md:hidden">
+            <div aria-hidden="true" className="barcode-bars" />
+            <ul className="barcode-text label" aria-label="What we print on">
+              {garments.map((garment) => (
+                <li key={garment}>{garment}</li>
+              ))}
+            </ul>
+          </div>
           <div className="lg:order-2 lg:col-span-3">
             <h1 className="hyphens-none">
               No minimum

@@ -67,8 +67,8 @@ function AboutRoute() {
         <h2 className="lg:col-span-4">Meet Declan Savage</h2>
         <div className="max-w-prose lg:col-span-8">
           <p>
-            Declan has been designing since university, and That&apos;s Savage
-            is his own print and design studio.
+            Declan has been designing since he finished degree in Donegal, and
+            That&apos;s Savage is his own print and design studio.
           </p>
           <p className="mb-0">
             He is also head printer at{" "}
