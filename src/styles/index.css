@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "react-toastify/dist/ReactToastify.css";
-@import "./tokens.css";
+@import "./brand.css";
 
 @utility shadow-hard {
   box-shadow: var(--shadow-hard);
@@ -438,7 +438,7 @@
     width: 128px;
     height: auto;
     margin-left: -64px;
-    mix-blend-mode: multiply;
+    opacity: 0.9;
     pointer-events: none;
   }
 
