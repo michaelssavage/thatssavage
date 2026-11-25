@@ -5,6 +5,8 @@ import { SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FormSubmission, FormValueTypes } from "types/form";
 
+const WEB3FORMS_ACCESS_KEY = "8e8b9196-c2f9-4ad6-87c0-21740fb2e4f7";
+
 const title = "Contact | That's Savage";
 const description =
   "Ask for a quote or send a question. That's Savage in Monaghan will get back to you.";
@@ -39,7 +41,7 @@ function ContactRoute() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_FORM_ACCESS_KEY,
+          access_key: WEB3FORMS_ACCESS_KEY,
           ...formData,
         }),
       });
