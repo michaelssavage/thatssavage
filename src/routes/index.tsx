@@ -97,14 +97,20 @@ function HomeRoute() {
             </ul>
           </div>
           <div className="lg:order-2 lg:col-span-3">
-            <h1 className="hyphens-none">
+            <h1 className="hyphens-none group">
               No minimum
-              <br className="max-xl:hidden" /> order.
+              <br className="max-xl:hidden" /> order
+              <span className="group-hover:hidden">.</span>
+              <span className="group-hover:inline hidden">!</span>
             </h1>
             <p className="mb-4 text-2xl italic">
               There are enough rules in life. That&apos;s showbiz baby!
             </p>
-            <p className="button mb-4">T-shirts from €20 · Hoodies from €35</p>
+            <p className="price-line mb-4">
+              <mark className="bg-transparent bg-linear-to-t from-lemon-yellow from-50% to-transparent to-50% px-1 text-ink box-decoration-clone">
+                T-shirts from €20 · Hoodies from €35
+              </mark>
+            </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link to="/contact" className="button">
                 Get a quote →
@@ -120,12 +126,11 @@ function HomeRoute() {
               label="Mr. Savage himself"
               className="relative"
             >
-              {/* TODO(owner): self-portrait.png is the only off-palette element on the site (salmon and light blue fills). Ask about a riso recolour. */}
               <img
                 src="/self-portrait.png"
                 alt="Self portrait"
                 fetchPriority="high"
-                className="size-72 object-contain lg:size-80"
+                className="size-72 object-contain lg:size-80 hover:scale-x-[-1]"
               />
             </Figure>
           </div>
@@ -207,14 +212,13 @@ function HomeRoute() {
               label="Poster prints"
               className="max-sm:col-span-2"
             >
-              <div className="flex aspect-square max-sm:aspect-auto flex-col justify-between gap-4 grain bg-fluoro-pink p-4 text-ink">
+              <div className="flex aspect-square max-sm:aspect-auto flex-col justify-between gap-4 grain bg-paper p-4 text-ink border-ink-muted border-1">
                 <p className="mb-0 font-chango text-3xl leading-tight lg:max-xl:text-xl">
                   “Be Grand Hi!”
                 </p>
                 <p className="mb-0 font-chango text-3xl leading-tight lg:max-xl:text-xl">
                   “That&apos;s a Holy Tarra”
                 </p>
-                <p className="label mb-0">Irish sayings on paper</p>
               </div>
             </Figure>
           </div>
@@ -263,23 +267,19 @@ function HomeRoute() {
                 italic
                 className={`${printTilts[index]} ${printOffsets[index]}`}
               >
-                <div className="photo-print group">
+                <div className="photo-print hover:rotate-5">
                   <img
                     src={tapes[index % tapes.length]}
                     alt=""
                     aria-hidden="true"
                     className="tape"
                   />
-                  <div
-                    className={`halftone ${index % 2 === 0 ? "" : "halftone-flip"}`}
-                  >
-                    <img
-                      src={img}
-                      alt={alt}
-                      loading="lazy"
-                      className="block aspect-4/5 w-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
-                    />
-                  </div>
+                  <img
+                    src={img}
+                    alt={alt}
+                    loading="lazy"
+                    className="block aspect-4/5 w-full object-cover"
+                  />
                 </div>
               </Figure>
             ))}

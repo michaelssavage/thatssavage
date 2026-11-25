@@ -60,15 +60,26 @@ function ContactRoute() {
 
   return (
     <main className="sheet grid gap-8 py-8 lg:grid-cols-12">
-      <div className="lg:col-span-5">
+      <div className="lg:col-span-6">
         <h1>Contact us</h1>
         <p className="max-w-prose text-xl italic">
           Got a question? Want a quote? Got some feedback? Don&apos;t hesitate
           to get in contact and we will be happy to help.
         </p>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.267048559757!2d-6.851839930165681!3d54.20545471104263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4860a2c03d82df3f%3A0xa00c7a99731b5c0!2sCarrickaderry%2C%20Clontibret%2C%20Co.%20Monaghan%2C%20Ireland!5e0!3m2!1sen!2ses!4v1795647755079!5m2!1sen!2ses"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title="Google Maps"
+        />
       </div>
 
-      <div className="relative border-4 border-dashed border-ink bg-lemon-yellow p-8 lg:col-span-7">
+      <div className="relative border-4 border-dashed border-ink bg-lemon-yellow p-8 lg:col-span-6">
         <span
           aria-hidden="true"
           className="absolute -top-4 left-8 bg-paper px-2 text-2xl leading-none"

@@ -63,8 +63,15 @@ function AboutRoute() {
         </p>
       </header>
 
-      <section className="frame mt-8 grid bg-cobalt p-8 text-paper lg:grid-cols-12 lg:gap-8">
-        <h2 className="lg:col-span-4">Meet Declan Savage</h2>
+      <section className="frame relative mt-8 grid bg-cobalt p-8 text-paper lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-4">
+          <h2>Meet Declan Savage</h2>
+          <img
+            src="/logo.png"
+            alt="That's Savage logo"
+            className="absolute -top-12 md:-top-8 right-2 md:right-8 size-32 sm:size-35 lg:size-40 lg:static lg:-mt-14 lg:ml-auto hover:scale-x-[-1]"
+          />
+        </div>
         <div className="max-w-prose lg:col-span-8">
           <p>
             Declan has been designing since he finished degree in Donegal, and

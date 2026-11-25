@@ -1,10 +1,9 @@
 import deantaIMuineachan from "assets/deanta-i-muineachan.png";
-import { PinIcon } from "components/Icons";
 import { PageLink } from "components/page-link";
 import { irishDate } from "utils/irish-date";
 
 const item =
-  "flex w-fit min-h-11 items-center gap-2 text-paper no-underline hover:underline [&_svg]:size-6 [&_svg]:shrink-0";
+  "flex w-fit mb-2 items-center gap-2 text-paper no-underline hover:underline [&_svg]:size-6 [&_svg]:shrink-0";
 
 const heading = "mb-4 text-lemon-yellow";
 
@@ -14,14 +13,11 @@ export const Footer = () => (
       <div className="grid gap-8 md:grid-cols-4">
         <section>
           <h3 className={heading}>Printed in Monaghan</h3>
-          <a href="https://goo.gl/maps/gv5ke2gXp7STHdPe7" className={item}>
-            <PinIcon /> Monaghan, H18 X058
-          </a>
           <a href="tel:+353872105305" className={item}>
-            +353 87 210 5305
+            Call: +353 87 210 5305
           </a>
           <a href="mailto:declansavo@hotmail.com" className={item}>
-            declansavo@hotmail.com
+            Email: declansavo@hotmail.com
           </a>
           <a
             href="https://wa.me/353872105305"
@@ -29,7 +25,7 @@ export const Footer = () => (
             target="_blank"
             rel="noreferrer"
           >
-            WhatsApp
+            Text: WhatsApp
           </a>
         </section>
 
@@ -61,7 +57,7 @@ export const Footer = () => (
           </a>
         </section>
 
-        <div className="flex justify-center max-md:order-last md:items-start">
+        <div className="flex flex-col items-center justify-center max-md:order-last">
           <img
             src={deantaIMuineachan}
             alt="Déanta i Muineachán (Made in Monaghan) stamp"
@@ -71,7 +67,7 @@ export const Footer = () => (
 
         <section>
           <h3 className={heading}>Notices</h3>
-          <p className="mt-2 mb-0">
+          <p className="my-2">
             Created by{" "}
             <a
               href="https://www.linkedin.com/in/liam-savage-72b532101"
@@ -82,11 +78,29 @@ export const Footer = () => (
             </a>
             {" & "}
             <a
-              href="https://www.linkedin.com/in/michaelssavage/"
+              href="https://www.michaelsavage.ie"
               target="_blank"
               rel="noreferrer"
             >
               Michael
+            </a>
+            {" & "}
+            <a
+              href="https://www.meganmoylan.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Megan
+            </a>
+          </p>
+          <p>
+            Loved by{" "}
+            <a
+              href="https://www.instagram.com/the_jiving_strongman/?hl=en"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Declan
             </a>
             {` · ${irishDate().year}`}
           </p>
