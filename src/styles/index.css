@@ -596,3 +596,7 @@
     scroll-behavior: auto;
   }
 }
+
+body .nl-wrap {
+  display: none;
+}
